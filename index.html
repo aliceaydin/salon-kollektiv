@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DER SALON</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --line: #111111;
+    --muted: #6b6b6b;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---- Nav ---- */
+  header.nav {
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+  }
+  header.nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    text-decoration: none;
+  }
+  .logo img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+  }
+  .logo span {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .nav-link {
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+  }
+  .lang-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: var(--muted);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+  }
+  .lang-btn.active {
+    color: var(--ink);
+    font-weight: 600;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  /* ---- Hero / Intro ---- */
+  .hero {
+    padding: 72px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+  }
+  .hero h1 {
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.05;
+    margin: 0 0 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .hero p {
+    max-width: 62ch;
+    color: #222;
+    margin: 0 0 16px;
+  }
+
+  /* ---- Focus areas ---- */
+  .focus {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .focus ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .focus li {
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  .focus li:first-child { border-top: none; }
+
+  /* ---- Team ---- */
+  .team {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .label {
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .team-grid h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .team-grid p {
+    margin: 0;
+    color: #333;
+  }
+
+  /* ---- Image ---- */
+  .visual {
+    border-bottom: 1px solid var(--line);
+    padding: 56px 0;
+    text-align: center;
+  }
+  .visual img {
+    max-width: 100%;
+    height: auto;
+    max-height: 480px;
+  }
+
+  /* ---- Contact ---- */
+  .contact {
+    padding: 72px 0 80px;
+    text-align: center;
+  }
+  .contact .label {
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .contact a.email {
+    font-size: clamp(20px, 3.5vw, 30px);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+  }
+  .contact-meta {
+    margin-top: 18px;
+    color: #333;
+  }
+  .contact-meta span { display: inline-block; margin: 0 10px; }
+
+  .download {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 14px 28px;
+    border: 1px solid var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .download:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 20px 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 760px) {
+    .hero .wrap { grid-template-columns: 1fr; gap: 32px; }
+    .team-grid { grid-template-columns: 1fr; gap: 28px; }
+    header.nav .wrap { flex-wrap: wrap; row-gap: 14px; }
+    .nav-right { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#">
+      <img src="assets/salon-logo.png" alt="DER SALON Logo">
+      <span>DER SALON</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button type="button" class="lang-btn active" id="lang-de" onclick="setLang('de')">DE</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+      </div>
+      <a class="nav-link" href="#kontakt" data-i18n="navContact">KONTAKT</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1 data-i18n="heroHeading">Kollektiv, Studio, Arbeitsraum.</h1>
+    </div>
+    <div>
+      <p data-i18n="heroP1">Der SALON ist unser interdisziplinäres Plenum und geteilter Arbeitsraum. Wir legen Schwerpunkt auf die Bereiche Grafikdesign, analoge Drucktechniken, Visuelle Identität, Typografie und Webdesign. Dabei arbeiten wir insbesondere im Feld Veranstaltungsdesign, Kunst, Performance und Theater.</p>
+      <p data-i18n="heroP2">Wir realisieren eigenständige Projekte, bündeln aber unsere Kompetenzen für institutionelle Arbeit und gemeinsame Projekte. Im SALON verbinden wir unterschiedliche Schwerpunkte zu einer kollektiven Praxis.</p>
+    </div>
+  </div>
+</section>
+
+<section class="focus">
+  <div class="wrap">
+    <div class="label" data-i18n="focusLabel">Unser Fokus</div>
+    <ul>
+      <li data-i18n="focusEvents">Events</li>
+      <li data-i18n="focusExhibitions">Ausstellungen</li>
+      <li data-i18n="focusPrint">Print</li>
+      <li data-i18n="focusDigital">Digitales</li>
+    </ul>
+  </div>
+</section>
+
+<section class="team">
+  <div class="wrap">
+    <div class="label" data-i18n="teamLabel">Die Praxis</div>
+    <div class="team-grid">
+      <div>
+        <h3>Alice Aydin</h3>
+        <p data-i18n="bioAlice">Verbindet Gestaltung mit gesellschaftlichem Engagement. Der Fokus liegt auf barrierefreien, inklusiven Konzepten, die durch handwerkliche Ausarbeitung sozialen Mehrwert schaffen.</p>
+      </div>
+      <div>
+        <h3>Liv Virnich</h3>
+        <p data-i18n="bioLiv">Beschäftigt sich mit Typografie und Serigrafie mit Fokus auf die Verbindung von analogen und digitalen Arbeitsweisen und experimentellen druckgrafischen Prozessen.</p>
+      </div>
+      <div>
+        <h3>Malin Rena Tesch</h3>
+        <p data-i18n="bioMalin">Arbeitet mit Sprache und Räumlichkeit. Sie untersucht, wie Schrift zwischen Kunst und Literatur wirkt und welche Räume sie dabei besetzt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visual">
+  <div class="wrap">
+    <img src="assets/salon-stools-nebeneinander.jpg" alt="Hocker nebeneinander im Studio DER SALON">
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="label" data-i18n="contactLabel">Kontakt</div>
+    <a class="email" href="mailto:studiosalonkollektiv@gmail.com">studiosalonkollektiv@gmail.com</a>
+    <div class="contact-meta">
+      <span>@salon.kollektiv</span>
+      <span>+49 1781 880888</span>
+    </div>
+    <br>
+    <a class="download" href="SALON_Portfolio.pdf" download data-i18n="downloadBtn">Portfolio herunterladen (PDF)</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>DER SALON</span>
+    <span id="year"></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const translations = {
+    de: {
+      navContact: 'KONTAKT',
+      heroHeading: 'Kollektiv, Studio, Arbeitsraum.',
+      heroP1: 'Der SALON ist unser interdisziplinäres Plenum und geteilter Arbeitsraum. Wir legen Schwerpunkt auf die Bereiche Grafikdesign, analoge Drucktechniken, Visuelle Identität, Typografie und Webdesign. Dabei arbeiten wir insbesondere im Feld Veranstaltungsdesign, Kunst, Performance und Theater.',
+      heroP2: 'Wir realisieren eigenständige Projekte, bündeln aber unsere Kompetenzen für institutionelle Arbeit und gemeinsame Projekte. Im SALON verbinden wir unterschiedliche Schwerpunkte zu einer kollektiven Praxis.',
+      focusLabel: 'Unser Fokus',
+      focusEvents: 'Events',
+      focusExhibitions: 'Ausstellungen',
+      focusPrint: 'Print',
+      focusDigital: 'Digitales',
+      teamLabel: 'Die Praxis',
+      bioAlice: 'Verbindet Gestaltung mit gesellschaftlichem Engagement. Der Fokus liegt auf barrierefreien, inklusiven Konzepten, die durch handwerkliche Ausarbeitung sozialen Mehrwert schaffen.',
+      bioLiv: 'Beschäftigt sich mit Typografie und Serigrafie mit Fokus auf die Verbindung von analogen und digitalen Arbeitsweisen und experimentellen druckgrafischen Prozessen.',
+      bioMalin: 'Arbeitet mit Sprache und Räumlichkeit. Sie untersucht, wie Schrift zwischen Kunst und Literatur wirkt und welche Räume sie dabei besetzt.',
+      contactLabel: 'Kontakt',
+      downloadBtn: 'Portfolio herunterladen (PDF)'
+    },
+    en: {
+      navContact: 'CONTACT',
+      heroHeading: 'Collective, studio, workspace.',
+      heroP1: 'DER SALON is our interdisciplinary forum and shared workspace. Our focus lies on graphic design, analogue printing techniques, visual identity, typography and web design — with particular attention to event design, art, performance and theatre.',
+      heroP2: 'We realise independent projects, but also combine our skills for institutional work and collaborations. At DER SALON, we bring different areas of focus together into one collective practice.',
+      focusLabel: 'Our Focus',
+      focusEvents: 'Events',
+      focusExhibitions: 'Exhibitions',
+      focusPrint: 'Print',
+      focusDigital: 'Digital',
+      teamLabel: 'The Practice',
+      bioAlice: 'Combines design with social engagement. Her focus is on accessible, inclusive concepts that create social value through careful craftsmanship.',
+      bioLiv: 'Works with typography and screen printing, focusing on the connection between analogue and digital methods and experimental print processes.',
+      bioMalin: 'Works with language and spatiality, exploring how type operates between art and literature and what spaces it occupies.',
+      contactLabel: 'Contact',
+      downloadBtn: 'Download portfolio (PDF)'
+    }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+    document.getElementById('lang-de').classList.toggle('active', lang === 'de');
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    try { localStorage.setItem('salon-lang', lang); } catch (e) {}
+  }
+
+  (function () {
+    let saved = 'de';
+    try { saved = localStorage.getItem('salon-lang') || 'de'; } catch (e) {}
+    setLang(saved);
+  })();
+</script>
+
+</body>
+</html>
